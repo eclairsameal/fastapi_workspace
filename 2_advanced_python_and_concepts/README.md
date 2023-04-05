@@ -3,7 +3,7 @@
 ## CODING EXERCISE: 
 Design a social media post model w/ Pydantic
 
-```python=
+```python
 """
 Your goal is to create a social media post model using pydantic. The model should have:
 An author, which is a string
