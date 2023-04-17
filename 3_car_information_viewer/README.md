@@ -32,3 +32,5 @@ Use a python file to simulate a database
 
 ## Get car by ID
 
+[Path, HTTPException, status](/3_car_information_viewer/note/Path_HTTPException_status.md)
+
