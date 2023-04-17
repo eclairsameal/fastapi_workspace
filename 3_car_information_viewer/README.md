@@ -36,9 +36,8 @@ Use a python file to simulate a database
 
 ## Adding cars（Body）
 Using the HTTP POST method
-利用HTTP POST的方法
-You can use the following url to test the results
-可以利用下面的url來測試結果
+
+Test Results :
 ```
 http://127.0.0.1:8000/docs
 ```
@@ -55,5 +54,7 @@ exclude_unset：除去預設值
 
 ## Deleting car
 
+Basically the same as Get car by ID
 基本跟 Get car by ID 一樣的寫法
 
+**到此 REST API 已經完成**
