@@ -1,4 +1,5 @@
 from fastapi import FastAPI, Query, Path, HTTPException, status, Body
+from fastapi.encoders import jsonable_encoder
 from pydantic import BaseModel, Field
 from typing import List, Optional, Dict
 from database import cars
@@ -19,6 +20,7 @@ app = FastAPI()
 @app.get("/")
 def root():
     return {"hello"}
+
 
 # http://127.0.0.1:8000/cars?number=2
 @app.get("/cars", response_model=List[Dict[str, Car]])
@@ -52,4 +54,16 @@ def add_cars(body_cars: List[Car], min_id: Optional[int] = Body(0)):
         min_id += 1
 
 
+@app.put("/cars/{id}", response_model=Dict[str, Car])
+def update_car(id: int, car: Car = Body(...)):
+    stored = car.get(id)
+    if not stored:  # 找不到此id(確保id的有效)
+        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Could not find car with given ID.")
+    stored = Car(**stored)  # 將字典解壓
+    new = car.dict(exclude_unset=True)  # 不會利用初始值
+    new = stored.copy(update=new)
+    cars[id] = jsonable_encoder(new)
+    response = {}
+    response[id] = cars[id]
+    return response
 
