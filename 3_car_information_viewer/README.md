@@ -52,3 +52,8 @@ http://127.0.0.1:8000/docs
 * 因為使用者只會輸入一部分的資料，我們希望沒輸入的部分為空值，而不是代入預設值
 exclude_unset：除去預設值 
 [官方文件](https://fastapi.tiangolo.com/zh/tutorial/body-updates/#pydantic-exclude_unset)
+
+## Deleting car
+
+基本跟 Get car by ID 一樣的寫法
+
