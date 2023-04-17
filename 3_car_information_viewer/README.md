@@ -34,3 +34,9 @@ Use a python file to simulate a database
 
 [Path, HTTPException, status](/3_car_information_viewer/note/Path_HTTPException_status.md)
 
+## Adding cars（Body）
+利用HTTP POST的方法
+可以利用下面的url來測試結果
+```
+http://127.0.0.1:8000/docs
+```
