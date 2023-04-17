@@ -18,29 +18,17 @@ class Car(BaseModel):
 ```
 ## Validation or field restrictions
 
-Add some additional constraints(額外的限制) to pydantic models
 
-[body-fields](https://fastapi.tiangolo.com/tutorial/body-fields/)
+[link](/3_car_information_viewer/note/field.md)
 
-```python
-from pydantic import Field
+## Simulation database(python file)
 
-variable_name: data_type = (default, various constraints)
-```
-當default不是必須時：...
+Use a python file to simulate a database
+使用 python file 來模擬資料庫
 
-### Example
-Let's say I want to shorten the year. I don't want any cars older than 1970 or later than the latest models.
-假設我想縮短年份。我不想要任何早於 1970 年或晚於最新款的汽車。
+## Get all cars path(Query)
 
-```python
-from pydantic import Field
-class Car(BaseModel):
-    make: str
-    model: str
-    year: int = Field(..., ge=1970, lt=2022)  # 1970 >= year >= 2022
-    price: float
-    engine: Optional[str] = "V4"
-    autonomous: bool
-    sold: List[str]
-```
+[link](/3_car_information_viewer/note/Get%20all%20cars%20path(Query).md)
+
+## Get car by ID
+
