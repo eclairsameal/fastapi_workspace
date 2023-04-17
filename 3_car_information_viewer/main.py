@@ -3,14 +3,15 @@ from pydantic import BaseModel, Field
 from typing import List, Optional, Dict
 from database import cars
 
+
 class Car(BaseModel):
-    make: str
-    model: str
-    year: int = Field(..., ge=1970, lt=2022)  # 1970 >= year >= 2022
-    price: float
+    make: Optional[str]
+    model: Optional[str]
+    year: Optional[int] = Field(...,ge=1970,lt=2022)
+    price: Optional[float]
     engine: Optional[str] = "V4"
-    autonomous: bool
-    sold: List[str]
+    autonomous: Optional[bool]
+    sold: Optional[List[str]]
 
 
 app = FastAPI()
