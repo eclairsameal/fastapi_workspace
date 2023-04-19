@@ -28,8 +28,7 @@ app.mount("/static", StaticFiles(directory="static"), name="static")  # mounting
 def root(request: Request):
     # return {"hello"}
     return templates.TemplateResponse("home.html",
-                                      {"request": request, "title": "FastAPI Home",
-                                       "text": "Welcome to your frist app in FastAPI"})
+                                      {"request": request, "title": "FastAPI Home"})
 
 
 # http://127.0.0.1:8000/cars?number=2

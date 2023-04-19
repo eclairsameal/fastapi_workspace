@@ -1,0 +1,38 @@
+# Header & footer components
+創建 header 跟 footer 個自的html
+
+## 導入 Bootstrap
+
+[Bootstrap](https://getbootstrap.com/docs/5.1/getting-started/introduction/)
+
+header.html 導入 Bootstrap css 
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <!--連接自定義樣式-->
+    <link rel="stylesheet" href="{{url_for('static', path='/style.css')}}" type="text/css">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{title|default("Document")}}</title> <!--如果沒有傳title參數的話-->
+</head>
+<body>
+```
+
+footer.html 導入 Bootstrap js 
+
+```html
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+</body>
+</html>
+```
+## 導入header.html footer.html
+
+```html
+    {% include 'header.html'%}
+    <h1>Welcome to your frist app in FastAPI</h1>
+    {% include 'footer.html'%}
+```

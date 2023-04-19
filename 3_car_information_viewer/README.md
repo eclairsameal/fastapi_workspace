@@ -83,5 +83,13 @@ templates = Jinja2Templates(directory="templates")
    app.mount("/static", StaticFiles(directory="static"), name="static")
    # 路徑 型態 名稱
    ```
-   
+ 
+ ## Creating your first HTML response
+創建一個html回應並應用模板來顯示傳遞的參數
+[HTML response](/3_car_information_viewer/note/HTML_response.md)
+
+##  Header & footer components
+導入 Bootstrap
+創建通用樣板(所有頁面都一樣的部分)
+
 
