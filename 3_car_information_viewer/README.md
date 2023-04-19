@@ -99,6 +99,9 @@ Bootstrap 有一個叫做容器的概念，它用於包含一切並使一切響�
 新增 static/style.css
 
 ## Creating the main page
+
+new index.html => cars
+
 重定向回复:當使用者輸入/後將網頁帶到/cars
 ```python
 from fastapi.responses import RedirectResponse
@@ -109,4 +112,21 @@ def root(request: Request):
     # return {"hello"}
     # return templates.TemplateResponse("home.html",{"request": request, "title": "FastAPI Home"})
     return RedirectResponse(url="/cars")
+```
+
+## Creating a car component
+
+new car.html => 顯示單個汽車資訊
+
+index.html 中再用 for 來迭代 car.html 
+
+為了讓這個循環在我們的index.HTML文件中的任何地方工作，而不是附加字典，我們只是要把它變成一個待辦事項列表，列表中的每個項目都是一個工具ID和汽車，以便它在我們的循環中正確解壓縮。
+
+所以我們要刪除它。然後我們不添加這個字典，而是要有一個新的元組，第一個是ID，第二個是汽車。
+```python
+# @app.get("/cars", response_class=HTMLResponse)
+    # to_add = {}
+    # to_add[id] = car
+    # response.append(to_add)
+    response.append((id, car))
 ```

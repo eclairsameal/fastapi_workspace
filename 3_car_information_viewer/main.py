@@ -39,9 +39,10 @@ def root(request: Request):
 def get_cars(request: Request, number: Optional[str] = Query("10", max_length=3)):
     response = []
     for id, car in list(cars.items())[:int(number)]:
-        to_add = {}
-        to_add[id] = car
-        response.append(to_add)
+        # to_add = {}
+        # to_add[id] = car
+        # response.append(to_add)
+        response.append((id, car))
     # return response
     return templates.TemplateResponse("index.html", {"request": request, "cars": response, "title": "Home"})
 
