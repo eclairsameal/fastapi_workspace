@@ -133,4 +133,8 @@ index.html 中再用 for 來迭代 car.html
 
 ## Adding a search feature
 
-[link](/3_car_information_viewer//note/search.md)
+[link](/3_car_information_viewer/note/search.md)
+
+## Create car feature
+
+[link](/3_car_information_viewer/note/Create_car.md)
