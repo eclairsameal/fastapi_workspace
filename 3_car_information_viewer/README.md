@@ -100,3 +100,13 @@ Bootstrap 有一個叫做容器的概念，它用於包含一切並使一切響�
 
 ## Creating the main page
 重定向回复:當使用者輸入/後將網頁帶到/cars
+```python
+from fastapi.responses import RedirectResponse
+
+# @app.get("/", response_class=HTMLResponse)
+@app.get("/", response_class=RedirectResponse)
+def root(request: Request):
+    # return {"hello"}
+    # return templates.TemplateResponse("home.html",{"request": request, "title": "FastAPI Home"})
+    return RedirectResponse(url="/cars")
+```

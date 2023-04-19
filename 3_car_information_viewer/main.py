@@ -1,5 +1,6 @@
 from fastapi import FastAPI, Query, Path, HTTPException, status, Body, Request
 from fastapi.encoders import jsonable_encoder
+from fastapi.responses import RedirectResponse
 from fastapi.templating import Jinja2Templates
 from fastapi.staticfiles import StaticFiles
 from pydantic import BaseModel, Field
@@ -24,22 +25,25 @@ app = FastAPI()
 app.mount("/static", StaticFiles(directory="static"), name="static")  # mounting the static files
 
 
-@app.get("/", response_class=HTMLResponse)
+# @app.get("/", response_class=HTMLResponse)
+@app.get("/", response_class=RedirectResponse)
 def root(request: Request):
     # return {"hello"}
-    return templates.TemplateResponse("home.html",
-                                      {"request": request, "title": "FastAPI Home"})
+    # return templates.TemplateResponse("home.html",{"request": request, "title": "FastAPI Home"})
+    return RedirectResponse(url="/cars")
 
 
 # http://127.0.0.1:8000/cars?number=2
-@app.get("/cars", response_model=List[Dict[str, Car]])
-def get_cars(number: Optional[str] = Query("10", max_length=3)):
+# @app.get("/cars", response_model=List[Dict[str, Car]])
+@app.get("/cars", response_class=HTMLResponse)
+def get_cars(request: Request, number: Optional[str] = Query("10", max_length=3)):
     response = []
     for id, car in list(cars.items())[:int(number)]:
         to_add = {}
         to_add[id] = car
         response.append(to_add)
-    return response
+    # return response
+    return templates.TemplateResponse("index.html", {"request": request, "cars": response, "title": "Home"})
 
 
 @app.get("/cars/{id}", response_model=Car)
