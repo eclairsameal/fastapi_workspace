@@ -1,9 +1,10 @@
-from fastapi import FastAPI, Query, Path, HTTPException, status, Body
+from fastapi import FastAPI, Query, Path, HTTPException, status, Body, Request
 from fastapi.encoders import jsonable_encoder
 from fastapi.templating import Jinja2Templates
 from fastapi.staticfiles import StaticFiles
 from pydantic import BaseModel, Field
 from typing import List, Optional, Dict
+from starlette.responses import HTMLResponse
 from database import cars
 
 templates = Jinja2Templates(directory="templates")  # setting up HTML templates
@@ -23,9 +24,12 @@ app = FastAPI()
 app.mount("/static", StaticFiles(directory="static"), name="static")  # mounting the static files
 
 
-@app.get("/")
-def root():
-    return {"hello"}
+@app.get("/", response_class=HTMLResponse)
+def root(request: Request):
+    # return {"hello"}
+    return templates.TemplateResponse("home.html",
+                                      {"request": request, "title": "FastAPI Home",
+                                       "text": "Welcome to your frist app in FastAPI"})
 
 
 # http://127.0.0.1:8000/cars?number=2
