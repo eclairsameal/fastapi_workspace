@@ -130,3 +130,7 @@ index.html 中再用 for 來迭代 car.html
     # response.append(to_add)
     response.append((id, car))
 ```
+
+## Adding a search feature
+
+[link](/3_car_information_viewer//note/search.md)

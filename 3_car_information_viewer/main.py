@@ -1,4 +1,4 @@
-from fastapi import FastAPI, Query, Path, HTTPException, status, Body, Request
+from fastapi import FastAPI, Query, Path, HTTPException, status, Body, Request, Form
 from fastapi.encoders import jsonable_encoder
 from fastapi.responses import RedirectResponse
 from fastapi.templating import Jinja2Templates
@@ -47,13 +47,25 @@ def get_cars(request: Request, number: Optional[str] = Query("10", max_length=3)
     return templates.TemplateResponse("index.html", {"request": request, "cars": response, "title": "Home"})
 
 
-@app.get("/cars/{id}", response_model=Car)
-def get_car_by_id(id: int = Path(..., ge=0, lt=1000)):
+@app.post("/search", response_class=RedirectResponse)
+def search_cars(id: str = Form(...)):
+    return RedirectResponse("/cars/" + id, status_code=302)
+
+
+# @app.get("/cars/{id}", response_model=Car)
+@app.get("/cars/{id}", response_class=HTMLResponse)
+def get_car_by_id(request: Request, id: int = Path(..., ge=0, lt=1000)):
     car = cars.get(id)
+    responde = templates.TemplateResponse("search.html", {"request": request, "car": car, "id": id,
+                                                      "title": "Search Car"})
     if not car:
         # raise HTTPException(status_code=404, detail="Couldn't find car by ID.")
-        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Couldn't find car by ID.")
-    return car
+        # raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Couldn't find car by ID.")
+        # return templates.TemplateResponse("search.html", {"request": request, "car": car, "id": id,
+        #                                                 "title": "Search Car"}, status_code=status.HTTP_404_NOT_FOUND)
+        responde.status_code = status.HTTP_404_NOT_FOUND
+    # return car
+    return responde
 
 
 @app.post("/cars", status_code=status.HTTP_201_CREATED)
