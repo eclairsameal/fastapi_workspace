@@ -58,3 +58,30 @@ Basically the same as Get car by ID
 基本跟 Get car by ID 一樣的寫法
 
 **到此 REST API 已經完成**
+
+## setting up HTML templates
+Jinja2 : Jinja is a fast, expressive, extensible templating engine. Special placeholders in the template allow writing code similar to Python syntax.
+
+The way Jinja works is it has a specific directory called templates, and this is going to contain all of your HTML that you need
+
+1. new templates folder
+   new static folder
+2. import
+```python
+from fastapi.templating import Jinja2Templates
+from fastapi.staticfiles import StaticFiles
+```
+3. create a templates variable 
+   Allows us to return a templated response populated with all the data we need, which will work with Jinja.
+   允許我們返回模板響應並填充在我們需要的所有數據中，這將與 Jinja 一起工作。
+```python
+templates = Jinja2Templates(directory="templates")
+```
+4. mounting the static files
+   放到app中來被使用
+   ```python
+   app.mount("/static", StaticFiles(directory="static"), name="static")
+   # 路徑 型態 名稱
+   ```
+   
+

@@ -1,14 +1,18 @@
 from fastapi import FastAPI, Query, Path, HTTPException, status, Body
 from fastapi.encoders import jsonable_encoder
+from fastapi.templating import Jinja2Templates
+from fastapi.staticfiles import StaticFiles
 from pydantic import BaseModel, Field
 from typing import List, Optional, Dict
 from database import cars
+
+templates = Jinja2Templates(directory="templates")  # setting up HTML templates
 
 
 class Car(BaseModel):
     make: Optional[str]
     model: Optional[str]
-    year: Optional[int] = Field(...,ge=1970,lt=2022)
+    year: Optional[int] = Field(..., ge=1970, lt=2022)
     price: Optional[float]
     engine: Optional[str] = "V4"
     autonomous: Optional[bool]
@@ -16,6 +20,8 @@ class Car(BaseModel):
 
 
 app = FastAPI()
+app.mount("/static", StaticFiles(directory="static"), name="static")  # mounting the static files
+
 
 @app.get("/")
 def root():
