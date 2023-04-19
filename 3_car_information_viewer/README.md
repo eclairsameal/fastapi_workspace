@@ -138,3 +138,9 @@ index.html 中再用 for 來迭代 car.html
 ## Create car feature
 
 [link](/3_car_information_viewer/note/Create_car.md)
+
+## Edit car feature
+
+[link](/3_car_information_viewer/note/Edit_car.md)
+
+## Delete car feature

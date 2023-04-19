@@ -107,6 +107,17 @@ def add_cars(
         min_id += 1
     return RedirectResponse(url="/cars", status_code=302)
 
+
+@app.get("/edit", response_class=HTMLResponse)
+def edit_car(request: Request, id: int = Query(...)):
+    car = cars.get(id)
+    if not car:
+        return templates.TemplateResponse("search.html", {"request": request, "id": id, "car": car, "title": "Edit Car"}
+                                          , status_code=status.HTTP_404_NOT_FOUND)
+    return templates.TemplateResponse("edit.html", {"request": request, "id": id, "car": car, "title": "Edit Car"})
+
+
+"""
 @app.put("/cars/{id}", response_model=Dict[str, Car])
 def update_car(id: int, car: Car = Body(...)):
     stored = car.get(id)
@@ -119,6 +130,32 @@ def update_car(id: int, car: Car = Body(...)):
     response = {}
     response[id] = cars[id]
     return response
+"""
+
+
+@app.post("/cars/{id}")
+def update_car(request: Request, id: int,
+    make: Optional[str] = Form(None),
+    model: Optional[str] = Form(None),
+    year: Optional[str] = Form(None),
+    price: Optional[float] = Form(None),
+    engine: Optional[str] = Form(None),
+    autonomous: Optional[bool] = Form(None),
+    sold: Optional[List[str]] = Form(None),):
+    stored = cars.get(id)
+    if not stored:
+        return templates.TemplateResponse("search.html",
+                                          {"request": request, "id": id, "car": stored, "title": "Edit Car"},
+                                          status_code=status.HTTP_404_NOT_FOUND)
+    stored = Car(**dict(stored))  # 確保它是字典格式再解壓
+    # 改變成用 pydantic 型態的 car 變數
+    car = Car(make=make, model=model, year=year, price=price, engine=engine, autonomous=autonomous, sold=sold)
+    new = car.dict(exclude_unset=True)
+    new = stored.copy(update=new)
+    cars[id] = jsonable_encoder(new)
+    response = {}
+    response[id] = cars[id]
+    return RedirectResponse(url="/cars", status_code=302)
 
 
 @app.delete("/cars/{id}")
