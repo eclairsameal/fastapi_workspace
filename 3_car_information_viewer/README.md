@@ -91,5 +91,12 @@ templates = Jinja2Templates(directory="templates")
 ##  Header & footer components
 導入 Bootstrap
 創建通用樣板(所有頁面都一樣的部分)
+[link](/3_car_information_viewer/note/Header_footer_components)
 
+## Designing a Navbar
 
+Bootstrap 有一個叫做容器的概念，它用於包含一切並使一切響應。
+新增 static/style.css
+
+## Creating the main page
+重定向回复:當使用者輸入/後將網頁帶到/cars
