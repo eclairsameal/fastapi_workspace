@@ -7,7 +7,9 @@ Returns all cars sent to the user in JSON format.
 def get_cars(number: Optional[str] = Query("10", max_length=3)):
 ```
 number：是一個 Query Parameters
+
 Query：基本上是另一個類似於字段和列表以及 DICT 的類，它允許我們指定查詢參數和函數。跟Field一樣第一個參數是預設值，後面的參數是各種限制。
+
 max_length：限制不會超過999
 
 ### Run
